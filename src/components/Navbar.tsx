@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
+import ThemeToggle from "@/components/ThemeToggle"
 
 const links = [
   { href: "/", label: "Inicio" },
@@ -55,13 +56,16 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden p-2 rounded-md text-muted hover:text-text hover:bg-surface transition-colors"
-          aria-label="Abrir menú"
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden p-2 rounded-md text-muted hover:text-text hover:bg-surface transition-colors"
+            aria-label="Abrir menú"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
       {open && (
