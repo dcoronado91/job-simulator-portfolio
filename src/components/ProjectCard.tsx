@@ -11,6 +11,8 @@ const categoryColors: Record<string, string> = {
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const hasMultipleGithub = project.githubLinks && project.githubLinks.length > 0
+
   return (
     <article className="group relative flex flex-col bg-card border border-border rounded-xl p-6 hover:border-green/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,135,0.05)]">
       {project.highlight && (
@@ -49,13 +51,41 @@ export default function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
 
-      <div className="flex items-center gap-3 pt-4 border-t border-border">
-        <Link href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-muted hover:text-text transition-colors">
-          <GithubIcon size={14} />
-          GitHub
-        </Link>
+      <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-border">
+        {/* Multiple GitHub repos */}
+        {hasMultipleGithub && project.githubLinks!.map((link) => (
+          <Link
+            key={link.label}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-sm text-muted hover:text-text transition-colors"
+          >
+            <GithubIcon size={14} />
+            {link.label}
+          </Link>
+        ))}
+
+        {/* Single GitHub repo */}
+        {!hasMultipleGithub && project.github && (
+          <Link
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-sm text-muted hover:text-text transition-colors"
+          >
+            <GithubIcon size={14} />
+            GitHub
+          </Link>
+        )}
+
         {project.live && (
-          <Link href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-green hover:text-green/80 transition-colors">
+          <Link
+            href={project.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-sm text-green hover:text-green/80 transition-colors"
+          >
             <ExternalLink size={14} />
             Ver en vivo
           </Link>
