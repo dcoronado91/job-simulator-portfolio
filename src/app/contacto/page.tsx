@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, MapPin } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 
 export const metadata: Metadata = {
@@ -8,12 +8,13 @@ export const metadata: Metadata = {
   description: "Contacta a Derek Coronado para proyectos, oportunidades o colaboraciones.",
 }
 
+const LINKEDIN = "https://www.linkedin.com/in/derek-friedhelm-coronado-chilin-12bbb3388/"
+
 const contacts = [
-  { Icon: Mail,        label: "Email",    value: "derekcoronado9@gmail.com",       href: "mailto:derekcoronado9@gmail.com" },
-  { Icon: Phone,       label: "Teléfono", value: "+502 4952-8028",                 href: "tel:+50249528028" },
-  { Icon: GithubIcon,  label: "GitHub",   value: "github.com/dcoronado91",         href: "https://github.com/dcoronado91" },
-  { Icon: LinkedinIcon,label: "LinkedIn", value: "linkedin.com/in/Derek-Coronado", href: "https://linkedin.com/in/Derek-Coronado" },
-  { Icon: MapPin,      label: "Ubicación",value: "Villa Nueva, Guatemala",          href: null },
+  { Icon: Mail,         label: "Email",     value: "derekcoronado9@gmail.com",   href: "mailto:derekcoronado9@gmail.com" },
+  { Icon: GithubIcon,   label: "GitHub",    value: "github.com/dcoronado91",     href: "https://github.com/dcoronado91" },
+  { Icon: LinkedinIcon, label: "LinkedIn",  value: "Derek Coronado",             href: LINKEDIN },
+  { Icon: MapPin,       label: "Ubicación", value: "Guatemala",                  href: null },
 ]
 
 export default function ContactoPage() {
@@ -25,7 +26,7 @@ export default function ContactoPage() {
         <h1 className="text-4xl font-bold text-text mb-4">Hablemos</h1>
         <p className="text-muted text-lg leading-relaxed">
           ¿Un proyecto, una oportunidad o simplemente quieres conocer más de mi trabajo?
-          Escríbeme directamente — respondo rápido.
+          Escríbeme — respondo rápido.
         </p>
       </div>
 

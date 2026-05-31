@@ -1,12 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { GraduationCap, Award, Briefcase, MapPin, Mail, Phone } from "lucide-react"
+import { GraduationCap, Briefcase, MapPin, Mail, Code2 } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 
 export const metadata: Metadata = {
   title: "Sobre mí — Derek Coronado",
-  description: "Formación, experiencia y certificaciones de Derek Coronado.",
+  description: "Desarrollador full-stack, estudiante de CS en la UVG, Guatemala.",
 }
+
+const LINKEDIN = "https://www.linkedin.com/in/derek-friedhelm-coronado-chilin-12bbb3388/"
 
 export default function SobreMiPage() {
   return (
@@ -15,25 +17,44 @@ export default function SobreMiPage() {
       {/* Header */}
       <div className="animate-fade-up delay-0">
         <p className="text-green font-mono text-sm mb-3">/ sobre-mi</p>
-        <h1 className="text-4xl font-bold text-text mb-4">Derek Friedhelm Coronado Chilin</h1>
-        <p className="text-muted text-lg leading-relaxed max-w-2xl">
-          Estudiante de tercer año de Ingeniería en Ciencias de la Computación en la Universidad del
-          Valle de Guatemala, becario de la Fundación Juan Bautista Gutiérrez. Construyo productos
-          web full-stack con criterio arquitectónico y atención al detalle.
-        </p>
+        <h1 className="text-4xl font-bold text-text mb-6">Derek Coronado</h1>
+
+        <div className="space-y-4 text-muted text-lg leading-relaxed max-w-2xl">
+          <p>
+            Soy desarrollador de software y estudiante de Ingeniería en Ciencias de la Computación
+            en la Universidad del Valle de Guatemala. Me muevo cómodo a lo largo del stack completo
+            — desde el diseño de esquemas de base de datos hasta la interfaz de usuario — aunque
+            mi enfoque preferido es el back-end y la arquitectura de sistemas.
+          </p>
+          <p>
+            Lo que me importa al escribir software: que sea correcto antes de que sea rápido, y
+            rápido antes de que sea complejo. Eso se traduce en decisiones deliberadas: elegir el
+            stack adecuado para el problema, dockerizar desde el día uno, y mantener un historial
+            de git que cuente la historia del proyecto.
+          </p>
+          <p>
+            Actualmente trabajo como freelance mientras completo mi formación universitaria. En el
+            lado académico he colaborado en equipos construyendo plataformas desplegadas en
+            producción, con responsabilidad sobre módulos completos: desde la capa de datos hasta
+            el endpoint REST y la UI que lo consume.
+          </p>
+          <p>
+            Me interesan los sistemas bien diseñados, las APIs que otros desarrolladores disfrutan
+            consumir, y los proyectos donde la decisión de arquitectura importa desde el inicio.
+          </p>
+        </div>
       </div>
 
-      {/* Contact info */}
-      <div className="animate-fade-up delay-100 grid sm:grid-cols-2 gap-3">
+      {/* Contact chips */}
+      <div className="animate-fade-up delay-100 flex flex-wrap gap-3">
         {[
-          { Icon: MapPin,      text: "Villa Nueva, Guatemala",              href: null },
-          { Icon: Mail,        text: "derekcoronado9@gmail.com",            href: "mailto:derekcoronado9@gmail.com" },
-          { Icon: Phone,       text: "+502 4952-8028",                      href: "tel:+50249528028" },
-          { Icon: GithubIcon,  text: "github.com/dcoronado91",              href: "https://github.com/dcoronado91" },
-          { Icon: LinkedinIcon,text: "linkedin.com/in/Derek-Coronado",      href: "https://linkedin.com/in/Derek-Coronado" },
+          { Icon: MapPin,       text: "Guatemala",                 href: null },
+          { Icon: Mail,         text: "derekcoronado9@gmail.com",  href: "mailto:derekcoronado9@gmail.com" },
+          { Icon: GithubIcon,   text: "github.com/dcoronado91",    href: "https://github.com/dcoronado91" },
+          { Icon: LinkedinIcon, text: "LinkedIn",                   href: LINKEDIN },
         ].map(({ Icon, text, href }) => (
-          <div key={text} className="flex items-center gap-3 text-sm text-muted">
-            <Icon size={14} className="text-green shrink-0" />
+          <div key={text} className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface text-sm text-muted hover:border-green/30 transition-colors">
+            <Icon size={13} className="text-green shrink-0" />
             {href ? (
               <Link href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="hover:text-green transition-colors">
                 {text}
@@ -61,10 +82,9 @@ export default function SobreMiPage() {
           </div>
           <ul className="space-y-1.5">
             {[
-              "Diseño y desarrollo de sitios WordPress con temas, maquetación y plugins personalizados",
-              "Lógica front-end con PHP según requisitos de UI de cada cliente",
-              "Ciclo completo: levantamiento de requerimientos, iteraciones y despliegue",
-              "Cliente destacado: AvanSa (nuevefp.com) — landing page, plugins PHP y tienda WooCommerce con pasarela de pago Recurrente",
+              "Desarrollo de sitios WordPress personalizados: temas, maquetación y plugins a medida",
+              "Ciclo completo de entrega: levantamiento de requerimientos, iteraciones y despliegue",
+              "Cliente destacado: AvanSa — landing page, plugins PHP y tienda WooCommerce con pasarela de pago Recurrente",
             ].map((b, i) => (
               <li key={i} className="text-sm text-muted flex items-start gap-2">
                 <span className="text-green/60 mt-0.5 shrink-0">›</span>{b}
@@ -86,7 +106,7 @@ export default function SobreMiPage() {
               institution: "Universidad del Valle de Guatemala",
               degree: "Ingeniería en Ciencias de la Computación y Tecnologías de la Información",
               period: "2024 – actualidad",
-              note: "Becario — Beca Isabel Gutiérrez de Bosch, Fundación Juan Bautista Gutiérrez",
+              note: "Mención Académica 2025 — Consejo Directivo UVG",
             },
             {
               institution: "Liceo Javier",
@@ -106,38 +126,25 @@ export default function SobreMiPage() {
         </div>
       </div>
 
-      {/* Awards & Certs */}
-      <div className="animate-fade-up delay-400 space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <Award size={18} className="text-green" />
-          <h2 className="text-xl font-semibold text-text">Logros y Certificaciones</h2>
+      {/* Stack snapshot */}
+      <div className="animate-fade-up delay-400">
+        <div className="flex items-center gap-3 mb-5">
+          <Code2 size={18} className="text-green" />
+          <h2 className="text-xl font-semibold text-text">Stack principal</h2>
         </div>
-        <div className="bg-card border border-green/20 rounded-xl p-5 mb-4">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h3 className="font-semibold text-text">Mención Académica</h3>
-              <p className="text-muted text-sm">Universidad del Valle de Guatemala</p>
-              <p className="text-muted text-xs mt-1 leading-relaxed">
-                Reconocimiento del Consejo Directivo por alto desempeño académico, participación y
-                comportamiento universitario sobresaliente durante el año académico 2025.
-              </p>
-            </div>
-            <span className="text-xs font-mono text-green bg-green/10 border border-green/20 px-2 py-0.5 rounded-full shrink-0">Feb 2026</span>
-          </div>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-3">
-          {[
-            { name: "Claude Code in Action", issuer: "Anthropic", date: "Marzo 2026" },
-            { name: "Liderazgo con Inteligencia Emocional", issuer: "CMI — Corporación Multi Inversiones", date: "Mayo 2026" },
-            { name: "Fundamentos de la Creatividad: De la Idea a la Práctica", issuer: "CMI — Corporación Multi Inversiones", date: "Mayo 2026" },
-          ].map((c) => (
-            <div key={c.name} className="bg-card border border-border rounded-xl p-4">
-              <p className="text-sm font-medium text-text mb-1">{c.name}</p>
-              <p className="text-xs text-muted">{c.issuer}</p>
-              <p className="text-xs text-green font-mono mt-1">{c.date}</p>
-            </div>
+        <div className="flex flex-wrap gap-2">
+          {["Next.js", "TypeScript", "Go", "NestJS", "Python", "PostgreSQL", "Docker"].map((t) => (
+            <span key={t} className="font-mono text-sm text-muted border border-border bg-card px-3 py-1 rounded-lg hover:border-green/30 hover:text-green transition-colors">
+              {t}
+            </span>
           ))}
         </div>
+        <p className="text-muted text-sm mt-3">
+          Ver justificación técnica de cada elección →{" "}
+          <Link href="/tecnologias" className="text-green hover:text-green/80 underline underline-offset-4 transition-colors">
+            Tecnologías
+          </Link>
+        </p>
       </div>
 
       {/* Languages */}

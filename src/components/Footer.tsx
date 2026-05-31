@@ -2,6 +2,8 @@ import Link from "next/link"
 import { Mail } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 
+const LINKEDIN = "https://www.linkedin.com/in/derek-friedhelm-coronado-chilin-12bbb3388/"
+
 export default function Footer() {
   return (
     <footer className="border-t border-border mt-auto">
@@ -15,7 +17,7 @@ export default function Footer() {
           <Link href="https://github.com/dcoronado91" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-green transition-colors" aria-label="GitHub">
             <GithubIcon size={18} />
           </Link>
-          <Link href="https://linkedin.com/in/Derek-Coronado" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-green transition-colors" aria-label="LinkedIn">
+          <Link href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-green transition-colors" aria-label="LinkedIn">
             <LinkedinIcon size={18} />
           </Link>
           <Link href="mailto:derekcoronado9@gmail.com" className="text-muted hover:text-green transition-colors" aria-label="Email">
