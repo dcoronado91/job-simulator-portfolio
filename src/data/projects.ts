@@ -6,6 +6,8 @@ export type Project = {
   year: string
   category: "Full-Stack" | "Backend" | "Frontend" | "Móvil"
   description: string
+  descriptionEn?: string
+  image?: string
   bullets: string[]
   tech: string[]
   github: string | null
@@ -21,8 +23,11 @@ export const projects: Project[] = [
     year: "2026",
     category: "Full-Stack",
     highlight: true,
+    image: "/projects/uvg-collab.png",
     description:
       "Plataforma de gestión de proyectos académicos para asociaciones estudiantiles de la UVG. Equipo de 5 personas, desplegada en producción.",
+    descriptionEn:
+      "Academic project management platform for UVG student associations. Built by a team of 5, deployed in production.",
     bullets: [
       "Endpoint de postulaciones con validaciones integrando Next.js y NestJS (Clean Architecture 4 capas)",
       "Módulo de notificaciones en tiempo real: endpoints REST, triggers automáticos, campana con badge",
@@ -39,8 +44,11 @@ export const projects: Project[] = [
     year: "2026",
     category: "Full-Stack",
     highlight: true,
+    image: "/projects/nba-tracker.png",
     description:
       "Aplicación web para consultar estadísticas de la NBA en tiempo real. Frontend desplegado en Vercel con backend propio para manejo de datos y caché.",
+    descriptionEn:
+      "Web app for querying NBA statistics in real time. Frontend deployed on Vercel with a custom backend for data management and caching.",
     bullets: [
       "Consulta de estadísticas de equipos y jugadores consumiendo APIs externas de datos deportivos",
       "Backend independiente para gestión de caché, normalización de datos y endpoints propios",
@@ -61,8 +69,11 @@ export const projects: Project[] = [
     year: "2026",
     category: "Backend",
     highlight: true,
+    image: "/projects/albums-api.png",
     description:
       "API REST completa construida únicamente con la biblioteca estándar de Go. Cero dependencias externas, dockerizada y activa en producción.",
+    descriptionEn:
+      "Full REST API built exclusively with Go's standard library. Zero external dependencies, Dockerized and live in production.",
     bullets: [
       "CRUD completo con respuestas de error estructuradas en JSON",
       "GET con filtros combinables por query params, POST, PUT, PATCH, DELETE y health ping",
@@ -79,8 +90,11 @@ export const projects: Project[] = [
     year: "2026",
     category: "Full-Stack",
     highlight: true,
+    image: "/projects/gestion-tiendas.png",
     description:
       "Sistema full-stack de administración de tiendas con base de datos relacional y ORM. Gestión de inventario, ventas y reportes, desplegado en producción.",
+    descriptionEn:
+      "Full-stack store management system with a relational database and ORM. Inventory management, sales and reports, deployed in production.",
     bullets: [
       "Modelo relacional con entidades para tiendas, productos, clientes y transacciones",
       "Operaciones CRUD completas con ORM para queries type-safe",
@@ -97,8 +111,11 @@ export const projects: Project[] = [
     year: "2026",
     category: "Frontend",
     highlight: true,
+    image: "/projects/calculadora-react.png",
     description:
       "Calculadora web construida con React y Vite, con pruebas unitarias implementadas. Demuestra dominio de testing en frontend y flujo de trabajo con bundlers modernos.",
+    descriptionEn:
+      "Web calculator built with React and Vite, with unit tests. Demonstrates frontend testing proficiency and workflow with modern bundlers.",
     bullets: [
       "Lógica de operaciones con cobertura de pruebas unitarias",
       "Construida con Vite como bundler — builds rápidos y DX optimizado",
@@ -114,8 +131,11 @@ export const projects: Project[] = [
     year: "2026",
     category: "Frontend",
     highlight: true,
+    image: "/projects/snake-react.png",
     description:
       "Juego Snake clásico implementado con React y Vite. Manejo de estado del juego, lógica de colisiones y loop de animación sin librerías externas de juego.",
+    descriptionEn:
+      "Classic Snake game built with React and Vite. Game state, collision detection and animation loop — no external game libraries.",
     bullets: [
       "Game loop con requestAnimationFrame y manejo de estado con hooks",
       "Detección de colisiones, crecimiento de serpiente y lógica de puntuación",
@@ -133,6 +153,8 @@ export const projects: Project[] = [
     highlight: false,
     description:
       "Plataforma de carpool universitaria. Diseñé e implementé la landing page completa y los tokens visuales de toda la UI con React y Tailwind CSS.",
+    descriptionEn:
+      "University carpool platform. Designed and implemented the full landing page and visual design tokens for the entire UI with React and Tailwind CSS.",
     bullets: [
       "Landing page nueva diseñada e implementada desde cero con React y Tailwind CSS",
       "Definición de paleta de colores y design tokens en Tailwind config, aplicados en toda la app",
@@ -150,6 +172,8 @@ export const projects: Project[] = [
     highlight: false,
     description:
       "Aplicación de concientización marítima. Frontend con React y capa de datos con MongoDB.",
+    descriptionEn:
+      "Maritime awareness application. React frontend with a MongoDB data layer.",
     bullets: [
       "Componentes React reutilizables integrados con API REST en Express",
       "Modificaciones directas sobre registros MongoDB para integridad del contenido",
