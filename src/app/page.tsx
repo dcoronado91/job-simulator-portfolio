@@ -348,7 +348,7 @@ function SectionHead({ label, title }: { label: string; title: string }) {
           {label}
         </motion.p>
       </div>
-      <h2 className="text-4xl md:text-5xl font-bold text-text">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text">
         {words.map((word, i) => (
           <motion.span
             key={i}
@@ -401,7 +401,7 @@ export default function HomePage() {
             Disponible para trabajar
           </motion.div>
 
-          <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-5">
+          <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-5">
             <motion.span
               style={{
                 background: "linear-gradient(90deg, #00FF87, #22D3EE, #6366F1, #00FF87, #22D3EE)",
@@ -484,7 +484,7 @@ export default function HomePage() {
       {/* ══════════════════════════ SOBRE MÍ ══ */}
       <Section id="sobre-mi" number="01" ambientColor="cyan">
         <SectionHead label="/ sobre mí" title="Quién soy" />
-        <div className="grid md:grid-cols-2 gap-12 items-start mt-12">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start mt-8 md:mt-12">
           <motion.div
             className="space-y-5"
             variants={stagger()}
@@ -562,7 +562,7 @@ export default function HomePage() {
 
       {/* ══════════════════════════ PROYECTOS ══ */}
       <Section id="proyectos" number="02" ambientColor="green">
-        <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
+        <div className="flex items-end justify-between flex-wrap gap-4 mb-8 md:mb-12">
           <SectionHead label="/ proyectos" title="Trabajo reciente" />
           <motion.a
             href="#contacto"
@@ -717,7 +717,7 @@ export default function HomePage() {
       {/* ═══════════════════════════ CONTACTO ══ */}
       <Section id="contacto" number="04" ambientColor="green">
         <motion.div
-          className="relative rounded-2xl border border-border overflow-hidden p-12 md:p-20 text-center"
+          className="relative rounded-2xl border border-border overflow-hidden p-8 sm:p-12 md:p-20 text-center"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease }}
