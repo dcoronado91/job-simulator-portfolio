@@ -36,7 +36,7 @@ export const projects: Project[] = [
   {
     id: "nba-tracker",
     title: "NBA Tracker",
-    year: "2025",
+    year: "2026",
     category: "Full-Stack",
     highlight: true,
     description:
@@ -58,7 +58,7 @@ export const projects: Project[] = [
   {
     id: "albums-api",
     title: "Albums JSON API",
-    year: "2025",
+    year: "2026",
     category: "Backend",
     highlight: true,
     description:
@@ -76,7 +76,7 @@ export const projects: Project[] = [
   {
     id: "gestion-tiendas",
     title: "Sistema de Gestión de Tiendas",
-    year: "2024",
+    year: "2026",
     category: "Full-Stack",
     highlight: true,
     description:
@@ -94,7 +94,7 @@ export const projects: Project[] = [
   {
     id: "calculadora-react",
     title: "Calculadora React",
-    year: "2024",
+    year: "2026",
     category: "Frontend",
     highlight: true,
     description:
@@ -111,7 +111,7 @@ export const projects: Project[] = [
   {
     id: "snake-react",
     title: "Snake",
-    year: "2024",
+    year: "2026",
     category: "Frontend",
     highlight: true,
     description:
@@ -128,7 +128,7 @@ export const projects: Project[] = [
   {
     id: "triptide-uvg",
     title: "TripTide UVG",
-    year: "2024",
+    year: "2026",
     category: "Frontend",
     highlight: false,
     description:
@@ -145,7 +145,7 @@ export const projects: Project[] = [
   {
     id: "seasos",
     title: "SeaSOS",
-    year: "2024",
+    year: "2026",
     category: "Full-Stack",
     highlight: false,
     description:

@@ -4,7 +4,6 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Colors reference CSS vars so they respond to data-theme changes */
   --color-bg:      var(--c-bg);
   --color-surface: var(--c-surface);
   --color-card:    var(--c-card);
@@ -12,7 +11,6 @@
   --color-muted:   var(--c-muted);
   --color-border:  var(--c-border);
 
-  /* Accents — same in both themes */
   --color-green:  #00FF87;
   --color-purple: #6366F1;
   --color-cyan:   #22D3EE;
@@ -40,6 +38,20 @@
 
 /* ── Base ─────────────────────────────────────────────── */
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ── Noise grain overlay ──────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 500;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
 
 body {
   background: var(--c-bg);
@@ -56,14 +68,20 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #00FF87; }
 
 /* ── Grid background for hero ─────────────────────────── */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(0,255,135,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,135,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 80px 80px; }
 }
 
-/* ── Tech icons — white container works on both themes ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0,255,135,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,135,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: grid-drift 30s linear infinite;
+}
+
+/* ── Tech icons ───────────────────────────────────────── */
 .tech-icon-wrap {
   background: white;
   border-radius: 8px;
@@ -77,7 +95,95 @@ body {
   border: 1px solid rgba(0,0,0,0.08);
 }
 
-/* ── Animations ───────────────────────────────────────── */
+/* ── Ambient floating orbs (hero) ────────────────────── */
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(60px, -40px) scale(1.08); }
+  66%  { transform: translate(-30px, 25px) scale(0.94); }
+}
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%  { transform: translate(-50px, 35px) scale(1.06); }
+  80%  { transform: translate(35px, -20px) scale(0.92); }
+}
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(25px, 50px) scale(1.04); }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+.orb-1 {
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(0,255,135,0.13) 0%, transparent 70%);
+  top: 25%; left: 35%; transform: translate(-50%,-50%);
+  animation: orb-float-1 12s ease-in-out infinite;
+}
+.orb-2 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(99,102,241,0.11) 0%, transparent 70%);
+  top: 55%; left: 68%;
+  animation: orb-float-2 16s ease-in-out infinite;
+  animation-delay: 2s;
+}
+.orb-3 {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(34,211,238,0.09) 0%, transparent 70%);
+  top: 38%; left: 12%;
+  animation: orb-float-3 19s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+/* ── Ping ring for available badge ────────────────────── */
+@keyframes ping-ring {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.ping-ring {
+  animation: ping-ring 2s ease-out infinite;
+}
+
+/* ── Button shimmer on hover ──────────────────────────── */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: none;
+}
+.btn-shimmer:hover::after {
+  animation: shimmer-sweep 0.55s ease forwards;
+}
+@keyframes shimmer-sweep {
+  to { transform: translateX(100%); }
+}
+
+/* ── Animated gradient name ───────────────────────────── */
+@keyframes gradient-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-name {
+  background: linear-gradient(90deg, #00FF87, #22D3EE, #6366F1, #00FF87, #22D3EE);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 5s ease infinite;
+}
+
+/* ── Hero fade-up (load animations) ──────────────────── */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -95,3 +201,42 @@ body {
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 .delay-600 { animation-delay: 600ms; }
+
+/* ── Scroll-triggered reveal ──────────────────────────── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity   0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Section divider line ─────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--c-border), transparent);
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* ── Typewriter cursor blink ──────────────────────────── */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  background: #00FF87;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  border-radius: 1px;
+  animation: cursor-blink 0.7s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
