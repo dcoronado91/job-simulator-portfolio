@@ -3,42 +3,42 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Download } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import ThemeToggle from "@/components/ThemeToggle"
+import { useLang } from "@/context/lang"
+import { i18n } from "@/data/i18n"
 
 const navLinks = [
-  { id: "inicio",       label: "Inicio",       href: "/" },
-  { id: "sobre-mi",     label: "Sobre mí",     href: "/sobre-mi" },
-  { id: "proyectos",    label: "Proyectos",    href: "/proyectos" },
-  { id: "tecnologias",  label: "Tecnologías",  href: "/tecnologias" },
-  { id: "contacto",     label: "Contacto",     href: "/contacto" },
+  { id: "inicio",      navKey: "home"     as const, href: "/" },
+  { id: "sobre-mi",    navKey: "about"    as const, href: "/sobre-mi" },
+  { id: "proyectos",   navKey: "projects" as const, href: "/proyectos" },
+  { id: "tecnologias", navKey: "tech"     as const, href: "/tecnologias" },
+  { id: "contacto",    navKey: "contact"  as const, href: "/contacto" },
 ]
 
 export default function Navbar() {
   const pathname = usePathname()
   const isHome = pathname === "/"
+  const { lang, toggle } = useLang()
+  const dict = i18n[lang]
 
   const [open, setOpen]         = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("inicio")
 
-  // Scroll shadow
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", fn, { passive: true })
     return () => window.removeEventListener("scroll", fn)
   }, [])
 
-  // Active section detection (home only)
   useEffect(() => {
     if (!isHome) return
     const sections = document.querySelectorAll<HTMLElement>("section[id]")
     if (!sections.length) return
     const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id) })
-      },
+      (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id) }) },
       { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
     )
     sections.forEach((s) => obs.observe(s))
@@ -63,6 +63,7 @@ export default function Navbar() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-bg/90 backdrop-blur-md border-b border-border" : "bg-transparent"}`}>
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+
         {/* Logo */}
         <a
           href={isHome ? "#inicio" : "/"}
@@ -90,15 +91,38 @@ export default function Navbar() {
                     : "text-muted hover:text-text hover:bg-surface"
                 }`}
               >
-                {link.label}
+                {dict.nav[link.navKey]}
               </a>
             </li>
           ))}
         </ul>
 
         {/* Right actions */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
+          {/* Language toggle */}
+          <button
+            onClick={toggle}
+            className="flex items-center gap-0.5 px-2 py-1 rounded-md hover:bg-surface transition-colors font-mono text-xs font-semibold"
+            aria-label="Toggle language"
+          >
+            <span className={lang === "es" ? "text-green" : "text-muted"}>ES</span>
+            <span className="text-border px-0.5">/</span>
+            <span className={lang === "en" ? "text-green" : "text-muted"}>EN</span>
+          </button>
+
+          {/* Download CV — desktop only */}
+          <a
+            href="/CV-Derek-Coronado.pdf"
+            download
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border text-muted hover:border-green/40 hover:text-green text-xs font-mono transition-colors"
+          >
+            <Download size={12} />
+            {dict.nav.downloadCV}
+          </a>
+
           <ThemeToggle />
+
+          {/* Mobile hamburger */}
           <button
             onClick={() => setOpen((v) => !v)}
             className="md:hidden p-2 rounded-md text-muted hover:text-text hover:bg-surface transition-colors"
@@ -136,10 +160,25 @@ export default function Navbar() {
                         : "text-muted hover:text-text hover:bg-surface"
                     }`}
                   >
-                    {link.label}
+                    {dict.nav[link.navKey]}
                   </a>
                 </motion.li>
               ))}
+              {/* CV download in mobile menu */}
+              <motion.li
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05, duration: 0.2 }}
+              >
+                <a
+                  href="/CV-Derek-Coronado.pdf"
+                  download
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-muted hover:text-green hover:bg-surface transition-colors"
+                >
+                  <Download size={14} />
+                  {dict.nav.downloadCV}
+                </a>
+              </motion.li>
             </ul>
           </motion.div>
         )}
